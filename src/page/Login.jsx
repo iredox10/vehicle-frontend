@@ -4,7 +4,6 @@ import jigawa_logo from "../../src/assets/jigawa_logo.png";
 import FormInput from '../components/FormInput'
 import { useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
-import User from '../../../backend/models/user';
 
 const Login = () => {
   const [chasisNumber, setChasisNumber] = useState("");
