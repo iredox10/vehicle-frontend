@@ -5,6 +5,7 @@ import FormInput from "../components/FormInput";
 import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { v4 as uuid4 } from "uuid";
+import { path } from "../../utils/path";
 
 
 const Home = () => {
@@ -63,7 +64,7 @@ const Home = () => {
 
     // navigate('invoice', {state:{ownerName,address,vehicleMake,vehicleType,licenseType,licenceFee}})
     try {
-      const res = await axios.post("http://localhost:3003/register", {
+      const res = await axios.post(`${path}/regiser`, {
         ownerName,
         address,
         vehicleMake,

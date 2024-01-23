@@ -14,6 +14,7 @@ import {
 import Pdf from "./Pdf";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { path } from "../../utils/path";
 
 const Invoice = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const Invoice = () => {
   const handlePayment = async (e) =>{
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:3003/payment", {
+      const res = await axios.post(`${path}/payment`, {
         chasisNumber: state.chasisNumber,
         status,
       });

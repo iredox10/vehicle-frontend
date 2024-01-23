@@ -4,6 +4,7 @@ import jigawa_logo from "../../src/assets/jigawa_logo.png";
 import FormInput from '../components/FormInput'
 import { useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { path } from '../../utils/path';
 
 const Login = () => {
   const [chasisNumber, setChasisNumber] = useState("");
@@ -11,7 +12,7 @@ const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3003/login", {
+      const res = await axios.post(`${path}/login`, {
         chasisNumber,
       });
       const user = res.data

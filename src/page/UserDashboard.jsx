@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom' 
 
 import jigawa_logo from "../../src/assets/jigawa_logo.png";
+import { path } from '../../utils/path';
 
 const UserDashboard = () => {
     const location = useLocation()
@@ -12,7 +13,7 @@ const UserDashboard = () => {
     useEffect(()=>{
         const fetch =async () =>{
             try {
-                const user = await axios(`http://localhost:3003/user/${state.chasisNumber}`)
+                const user = await axios(`${path}/user/${state.chasisNumber}`)
                 console.log(user.data)
                 setUser(user.data)
             } catch (err) {
