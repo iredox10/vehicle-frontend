@@ -64,21 +64,24 @@ const Home = () => {
 
     // navigate('invoice', {state:{ownerName,address,vehicleMake,vehicleType,licenseType,licenceFee}})
     try {
-      const res = await axios.post(`${path}/regiser`, {
-        ownerName,
-        address,
-        vehicleMake,
-        vehicleType,
-        licenseType,
-        licenceFee,
-        netWeight,
-        chasisNumber,
-        color,
-        personAuthorized,
-        weightAuthorized,
-        applicationId: uuid4().toString(),
-        refNumber: uuid4().toString(),
-      });
+      const res = await axios.post(
+        `https://vehicle-backend.onrender.com/register`,
+        {
+          ownerName,
+          address,
+          vehicleMake,
+          vehicleType,
+          licenseType,
+          licenceFee,
+          netWeight,
+          chasisNumber,
+          color,
+          personAuthorized,
+          weightAuthorized,
+          applicationId: uuid4().toString(),
+          refNumber: uuid4().toString(),
+        }
+      );
       const user = res.data
       navigate("/user-dashboard", { state: user });
     } catch (err) {

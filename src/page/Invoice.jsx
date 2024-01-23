@@ -35,10 +35,13 @@ const Invoice = () => {
   const handlePayment = async (e) =>{
     e.preventDefault()
     try {
-      const res = await axios.post(`${path}/payment`, {
-        chasisNumber: state.chasisNumber,
-        status,
-      });
+      const res = await axios.post(
+        `https://vehicle-backend.onrender.com/payment`,
+        {
+          chasisNumber: state.chasisNumber,
+          status,
+        }
+      );
       // const res = await axios.post("http://localhost:3003/p", {
       //   chasisNumber: state.chasisNumber,
       //   status,

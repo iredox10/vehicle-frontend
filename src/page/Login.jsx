@@ -12,9 +12,12 @@ const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${path}/login`, {
-        chasisNumber,
-      });
+      const res = await axios.post(
+        `https://vehicle-backend.onrender.com/login`,
+        {
+          chasisNumber,
+        }
+      );
       const user = res.data
       console.log(user)
       navigate('/user-dashboard', {state: user})
