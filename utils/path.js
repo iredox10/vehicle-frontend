@@ -1,1 +1,1 @@
-export const path = "http://localhost:3003" || 
+export const path = "http://localhost:3003" 
