@@ -13,7 +13,7 @@ const UserDashboard = () => {
     useEffect(()=>{
         const fetch =async () =>{
             try {
-                const user = await axios(`https://vehicle-backend.onrender.com/user${state.chasisNumber}`)
+                const user = await axios(`https://vehicle-backend.onrender.com/user/${state.chasisNumber}`)
                 console.log(user.data)
                 setUser(user.data)
             } catch (err) {
