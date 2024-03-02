@@ -75,7 +75,8 @@ const Invoice = () => {
      formData.append("Mobile", "08123456785");
      formData.append("Email", "sani22@gmail.com");
     //! add frontend url to the response url
-     formData.append("ResponseUrl", "http://localhost:5173/payment-successfull/")
+    //  formData.append("ResponseUrl", "http://localhost:5173/payment-successfull/")
+     formData.append("ResponseUrl", 'https://vehicle-frontendd.onrender.com/payment-successfull')
 try{
   const res =
       // await fetch("https://demo.nabroll.com.ng/api/v1/transactions/verify",{
