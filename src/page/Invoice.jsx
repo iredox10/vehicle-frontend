@@ -87,7 +87,8 @@ try{
       })
       let result = await res.json()
       if (result && result.code === "00"){
-        const res = await axios.post(`http://localhost:3003/updateRef/${id}` ||`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
+        // const res = await axios.post(`http://localhost:3003/updateRef/${id}` ||`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
+        const res = await axios.post(`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
           chasisNumber: state.chasisNumber,
           status,
           paymentUrl: result.PaymentUrl,
