@@ -124,7 +124,6 @@ try{
               Service (JIRS)
             </h1>
           </div>
-          <h1 className="text-white font-bold text-6xl self-end ">Invoice</h1>
         </div>
       </div>
       
