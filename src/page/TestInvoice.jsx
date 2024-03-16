@@ -53,6 +53,8 @@ const TestInvoice = () => {
   
   const hashKey = handleGenerateHmac(hashString, SecretKey);
   console.log('hash key', hashKey)
+  const email = `sani${Math.floor(Math.random()*100)}@gmail.com`
+  const phoneNumber = `9045${Math.floor(Math.random()*100)}${Math.floor(Math.random()*100)}${Math.floor(Math.random()*100)}456${Math.floor(Math.random()*100)}` 
   const handlePayment = async (e) =>{
     e.preventDefault()
 
@@ -79,17 +81,19 @@ try{
       let result = await res.json()
       if (result && result.code === "00"){
         // const res = await axios.post(`http://localhost:3003/updateRef/${id}` ||`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
-        // const res = await axios.post(`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
-        //   chasisNumber: state.chasisNumber,
-        //   status,
-        //   paymentUrl: result.PaymentUrl,
-        //   transactionRef: result.TransactionRef,
-        //   paymentCode: result.PaymentCode,
-        //   payerRefNo: PayerRefNo
-        // });
+        const res = await axios.post(`https://vehicle-backend-1.onrender.com/register` , {
+          email: email,
+          mobile: phoneNumber,
+          chasisNumber: state.chasisNumber,
+          status,
+          paymentUrl: result.PaymentUrl,
+          transactionRef: result.TransactionRef,
+          paymentCode: result.PaymentCode,
+          payerRefNo: PayerRefNo
+        });
         localStorage.setItem('plateNumber_user_id', id)
-        // console.log(res.data)
-        window.location.replace(result.PaymentUrl);
+        console.log(res.data)
+        // window.location.replace(result.PaymentUrl);
       }
        console.log(result);
 
