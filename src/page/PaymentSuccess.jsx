@@ -35,6 +35,19 @@ const PaymentSuccess = () => {
     };
     fetch();
   }, [id]);
+useEffect(() => {
+    const fetch = async () => {
+      try {
+        const res = await axios(
+          `https://vehicle-backend-1.onrender.com/`
+        );
+        console.log(user.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetch();
+  }, [id]);
 
   const ApiKey = "Pk_TeStHV9FnLZE1vSidgkH36b4s473lpKYkI58gYgc6M";
   const SecretKey = "Sk_teSTN-HY[n1]wIO32A-AU0XP5kRZ[tzHpOxQ6bf9]]";
