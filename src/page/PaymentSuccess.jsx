@@ -41,7 +41,7 @@ useEffect(() => {
         const res = await axios(
           `https://vehicle-backend-1.onrender.com/`
         );
-        console.log(user.data);
+        console.log('the nabrol response is:',user.data);
       } catch (err) {
         console.log(err);
       }
