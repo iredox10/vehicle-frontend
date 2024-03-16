@@ -42,7 +42,7 @@ const PaymentSuccess = () => {
   const Amount = user?.licenceFee;
   const transactionRef = user?.transactionRef;
   const payerRefNo = user?.payerRefNo;
-  console.log(Amount, transactionRef, payerRefNo);
+  console.log(Amount,'the transaction Id:', transactionRef, payerRefNo);
   // const hashString = "9baabd1a-ebc6" + "4000.00" + "753685974638" + ApiKey;
 
   useEffect(() => {
