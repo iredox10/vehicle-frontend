@@ -10,7 +10,7 @@ const UserLicense = () => {
       const fetch = async () => {
         try {
           const user = await axios(
-            `https://vehicle-backend-1.onrender.com/admin-user/${id}` ||
+            // `https://vehicle-backend-1.onrender.com/admin-user/${id}` ||
             `http://localhost:3003/admin-user/${id}`
           );
           console.log(user.data);
