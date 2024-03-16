@@ -46,7 +46,7 @@ const TestInvoice = () => {
 
   const ApiKey = "Pk_TeStHV9FnLZE1vSidgkH36b4s473lpKYkI58gYgc6M";
   const SecretKey = "Sk_teSTN-HY[n1]wIO32A-AU0XP5kRZ[tzHpOxQ6bf9]]";
-  const PayerRefNo = uuid4().slice(0, 13);
+  const PayerRefNo = uuid4().slice(0, 12);
   const Amount = '4000.00' 
 
   const hashString = PayerRefNo + Amount + ApiKey; 
