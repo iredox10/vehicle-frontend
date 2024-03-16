@@ -23,7 +23,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const user = await axios(
+        const user = await axios.post(
           `https://vehicle-backend-1.onrender.com/user/${id}`
         );
         console.log('the nabrol response', user.data);
