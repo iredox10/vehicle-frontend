@@ -85,7 +85,6 @@ try{
           email: email,
           mobile: phoneNumber,
           chasisNumber: uuid4(),
-          status,
           paymentUrl: result.PaymentUrl,
           transactionRef: result.TransactionRef,
           paymentCode: result.PaymentCode,
