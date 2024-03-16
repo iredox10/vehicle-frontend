@@ -14,11 +14,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/test" element={<TestInvoice />} />
+        <Route path="/webhook-receipt/:id" element={<WebhookReceipt />} />
         <Route path="/login" element={<Login />} />
         <Route path="/receipt/:id" element={<Receipt />} />
         <Route path="/invoice/:id" element={<Invoice />} />
         <Route path="/pdf" element={<Pdf />} />
         <Route path="/user-dashboard/:id" element={<UserDashboard />} />
+        <Route path="/webhook-user-dashboard/:id" element={<WebhookUser />} />
         <Route
           path="/admin-user-dashboard/:id"
           element={<AdminUserDashboard />}
