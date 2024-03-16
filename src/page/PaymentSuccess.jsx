@@ -26,7 +26,7 @@ const PaymentSuccess = () => {
         const user = await axios(
           `https://vehicle-backend-1.onrender.com/user/${id}`
         );
-        // console.log(user.data);
+        console.log(user.data);
         setLoading(false)
         setUser(user.data);
       } catch (err) {
