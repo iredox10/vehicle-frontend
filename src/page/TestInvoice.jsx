@@ -84,7 +84,7 @@ try{
         const res = await axios.post(`https://vehicle-backend-1.onrender.com/register` , {
           email: email,
           mobile: phoneNumber,
-          chasisNumber: state.chasisNumber,
+          chasisNumber: uuid4(),
           status,
           paymentUrl: result.PaymentUrl,
           transactionRef: result.TransactionRef,
