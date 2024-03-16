@@ -45,7 +45,7 @@ const PaymentSuccess = () => {
   // const hashString = "9baabd1a-ebc6" + "4000.00" + "753685974638" + ApiKey;
 
   useEffect(() => {
-    conosle.log("hello")
+    console.log("hello")
     setLoading(true)
     if (transactionRef && Amount && payerRefNo) {
       const hashString = payerRefNo + Amount + transactionRef + ApiKey;
