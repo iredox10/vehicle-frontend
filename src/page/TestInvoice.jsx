@@ -87,8 +87,7 @@ try{
         //   paymentCode: result.PaymentCode,
         //   payerRefNo: PayerRefNo
         // });
-        localStorage.setItem('plateNumber_user_id', '1234')
-        // localStorage.setItem()
+        localStorage.setItem('plateNumber_user_id', id)
         // console.log(res.data)
         window.location.replace(result.PaymentUrl);
       }
