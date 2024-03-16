@@ -9,6 +9,11 @@ import Admin from './page/Admin';
 import AdminUserDashboard from './page/AdminUserDashboard';
 import UserLicense from './page/UserLicense';
 import PaymentSuccess from './page/PaymentSuccess';
+import TestInvoice from './page/TestInvoice';
+import WebhookUser from './page/WebhookUser';
+import CompleteReg from './page/CompleteReg';
+import WebhookReceipt from './page/WebhookReceipt';
+
 function App() {
   return (
     <Router>
