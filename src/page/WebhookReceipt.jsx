@@ -10,7 +10,10 @@ const WebhookReceipt = () => {
     useEffect(()=>{
         const fetch = async()=>{
             try{
-            const res = await axios(`http://localhost:3003/user/${id}`)
+            const res = await axios(
+                 `https://vehicle-backend-1.onrender.com/user/${id}` ||
+                `http://localhost:3003/user/${id}`
+            )
             console.log(res.data)
             setUser(res.data)
             }catch(err){
