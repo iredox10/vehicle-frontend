@@ -13,6 +13,7 @@ import TestInvoice from './page/TestInvoice';
 import WebhookUser from './page/WebhookUser';
 import CompleteReg from './page/CompleteReg';
 import WebhookReceipt from './page/WebhookReceipt';
+import VerifyPayment from './page/VerifyPayment';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           path="/payment-successfull"
           element={<PaymentSuccess />}
         />
+        <Route path="/verify-payment/:id" element={<VerifyPayment />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/user-license/:id" element={<UserLicense />} />
       </Routes>
