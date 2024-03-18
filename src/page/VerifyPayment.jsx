@@ -9,6 +9,7 @@ const VerifyPayment = () => {
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resData, setResData] = useState(null)
   const [TransactionRef, setTransactionRef] = useState(null);
   const navigate = useNavigate();
   // const id = localStorage.getItem("plateNumber_user_id");
@@ -76,6 +77,7 @@ const VerifyPayment = () => {
           // if(data.msg == 'Pending')
           if (data) {
             setMsg(data.msg);
+            setResData(data)
             // setLoading(false);
           } else {
             setMsg("error in processing payment");
@@ -90,15 +92,14 @@ const VerifyPayment = () => {
 
   return (
     <div className="absolute top-2/4 text-center    left-[40%] ">
-      {!msg ? <p>loading...</p> : <p>{msg}</p>}
-{/*       <form>
-        <FormInput
-          label={"input transaction reference"}
-          htmlFor={"transaction reference"}
-          type={"text"}
-          onchange={(e)=> setTransactionRef( e.target.value)}
-        />
-      </form> */}
+      {!msg ? <p>loading...</p> : <div>
+       <p> {msg} </p>
+        <div>
+          <p>{data.PayerRefNo}</p>
+          <p>{data.amount}</p>
+          <p>{data.paymentDate}</p>
+        </div>
+      </div>}
     </div>
   );
 };
