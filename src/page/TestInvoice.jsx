@@ -92,7 +92,7 @@ try{
         });
         localStorage.setItem('plateNumber_user_id', id)
         console.log(res.data)
-        // window.location.replace(result.PaymentUrl);
+        window.location.replace(result.PaymentUrl);
       }
        console.log(result);
 
