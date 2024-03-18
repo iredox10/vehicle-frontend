@@ -97,8 +97,8 @@ const VerifyPayment = () => {
           htmlFor={"transaction reference"}
           type={"text"}
           onchange={(e)=> setTransactionRef( e.target.value)}
-        /> */}
-      </form>
+        />
+      </form> */}
       <button className="bg-green-400 px-4 py-2 capitalize font-bold hover:bg-green-700">verify</button>
     </div>
   );
