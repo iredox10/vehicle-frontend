@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { HmacSHA256 } from "crypto-js";
 import { v4 as uuid4 } from "uuid";
 import { useEffect, useState } from "react";
@@ -11,11 +11,12 @@ const VerifyPayment = () => {
   const [loading, setLoading] = useState(false);
   const [TransactionRef, setTransactionRef] = useState(null);
   const navigate = useNavigate();
-  const id = localStorage.getItem("plateNumber_user_id");
+  // const id = localStorage.getItem("plateNumber_user_id");
+  const {id} = useParams()
   const userPage = () => {
     navigate(`/user-dashboard/${id}`);
   };
-//! IMPLEMENT VERIFICATION OF USER PAYMENT USING THE DATA YOU SAVE WHEN INITIATING TRANSACITON.
+
   const handleGenerateHmac = (data, key) => {
     const hmac = HmacSHA256(data, key);
     return hmac;
