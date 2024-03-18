@@ -95,9 +95,9 @@ const VerifyPayment = () => {
       {!msg ? <p>loading...</p> : <div>
        <p> {msg} </p>
         <div>
-          <p>{resData.PayerRefNo}</p>
-          <p>{resData.amount}</p>
-          <p>{resData.paymentDate}</p>
+          <p> <span>Payer Reference Number: </span> {resData.PayerRefNo}</p>
+          <p> <span>Amount Paid: </span> {resData.amount}</p>
+          <p> <span>Payment Date: </span> {resData.paymentDate}</p>
         </div>
       </div>}
     </div>
