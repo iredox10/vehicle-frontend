@@ -26,8 +26,7 @@ const VerifyPayment = () => {
     const fetch = async () => {
       try {
         const user = await axios(
-          `https://vehicle-backend-1.onrender.com/user/${id}` ||
-            `http://localhost:3003/user/${id}`
+          `https://vehicle-backend-1.onrender.com/user/${id}`
         );
         console.log(user.data);
         setLoading(false);
@@ -100,7 +99,6 @@ const VerifyPayment = () => {
           onchange={(e)=> setTransactionRef( e.target.value)}
         />
       </form> */}
-      <button className="bg-green-400 px-4 py-2 capitalize font-bold hover:bg-green-700">verify</button>
     </div>
   );
 };
