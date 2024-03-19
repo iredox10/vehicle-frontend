@@ -88,7 +88,8 @@ try{
           paymentUrl: result.PaymentUrl,
           transactionRef: result.TransactionRef,
           paymentCode: result.PaymentCode,
-          payerRefNo: PayerRefNo
+          payerRefNo: PayerRefNo,
+          webhookUser: true
         });
         localStorage.setItem('plateNumber_user_id', id)
         console.log(res.data)

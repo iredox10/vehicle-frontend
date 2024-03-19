@@ -95,16 +95,7 @@ const UserDashboard = () => {
               </div>
             </div>
             <div className="flex gap-5">
-              {user.status == "paid" || user?.ownerName == '' ? (
-                 <NavLink
-                to={`/complete-reg/${user._id}`}
-                  // onClick={completeReg}
-                  className="bg-green-500 px-4 py-2 my-5 font-black hover:text-white"
-                >
-                  complete registration
-                </NavLink>
-
-              ) : (
+              {user.status == "paid" || user?.ownerName == '' ? '' : (
                 <NavLink
                 to={`/invoice/${user._id}`}
                   onClick={viewInvoice}
@@ -114,13 +105,13 @@ const UserDashboard = () => {
                 </NavLink>
               )}
               {!user.status == "paid" || !user?.ownerName == '' ? (
-                <button
+                <NavLink
                 to={`/receipt/${user._id}`}
                   // onClick={viewReceipt}
                   className="bg-green-700 px-4 py-2 my-5 font-black hover:text-white"
                 >
                   view Receipt
-                </button>
+                </NavLink>
               ) : (
                 ""
               )}

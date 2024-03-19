@@ -13,16 +13,14 @@ const navigate = useNavigate()
     e.preventDefault();
     try {
       const res = await axios.post(
-        `https://vehicle-backend-1.onrender.com/login`  || 
-         'http://localhost:3003/login',
+        `https://vehicle-backend-1.onrender.com/login`, 
         {
           email,
         }
       );
       const user = res.data
+      user.webhookUser ? navigate(`/webhook-user-dashboard/${user._id}`) : navigate(`/user-dashboard/${user._id}`)
       console.log(user)
-      navigate(`/user-dashboard/${user._id}`, {state: user})
-      
     } catch (err) {
       console.log(err);
     }

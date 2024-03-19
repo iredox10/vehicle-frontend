@@ -5,9 +5,6 @@ import jigawa_logo from "../../src/assets/jigawa_logo.png";
 import { path } from '../../utils/path';
 
 const WebhookUser = () => {
-    const location = useLocation()
-    const {state} = location
-    // console.log(state)
     const [user, setUser] = useState(null)
    const {id} = useParams() 
    console.log(id)
@@ -24,7 +21,7 @@ const WebhookUser = () => {
             }   
         } 
         fetch()
-    },[state])
+    },[id])
     const navigate = useNavigate()
     const completeReg = () =>{
         navigate('/webhook-reg', {state})
