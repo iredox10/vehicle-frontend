@@ -7,7 +7,8 @@ const Admin = () => {
   useEffect(()=>{
     const fetch = async ()=>{
       try {
-      const res =await axios('http://localhost:3003/users'|| 'https://vehicle-backend-1.onrender.com/users')
+      const res =await axios(
+       'https://vehicle-backend-1.onrender.com/users')
       const users = res.data
       setUsers(users)
       console.log(users)

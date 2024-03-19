@@ -66,8 +66,8 @@ const TestInvoice = () => {
      formData.append("PayerName", "idris"); 
      formData.append("Amount", Amount);
      formData.append("Description", 'plate licence');
-     formData.append("Mobile", "08123456785");
-     formData.append("Email", "sani22@gmail.com");
+     formData.append("Mobile", phoneNumber);
+     formData.append("Email", email);
     //! add frontend url to the response url
     //  formData.append("ResponseUrl", "http://localhost:5173/payment-successfull/")
     //  formData.append("ResponseUrl", 'https://vehicle-frontendd.onrender.com/payment-successfull/')
@@ -83,8 +83,8 @@ try{
         // const res = await axios.post(`http://localhost:3003/updateRef/${id}` ||`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
         const res = await axios.post(`https://vehicle-backend-1.onrender.com/register` , {
           email: email,
-          mobile: phoneNumber,
-          chasisNumber: uuid4(),
+          phoneNumbermobile: phoneNumber,
+          chasisNumber: uuid4().slice(0, 12),
           paymentUrl: result.PaymentUrl,
           transactionRef: result.TransactionRef,
           paymentCode: result.PaymentCode,

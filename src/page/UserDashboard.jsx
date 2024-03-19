@@ -15,8 +15,7 @@ const UserDashboard = () => {
         const fetch =async () =>{
             try {
                 const user = await axios(
-                  `https://vehicle-backend-1.onrender.com/user/${id}` ||
-                  `http://localhost:3003/user/${id}`
+                  `https://vehicle-backend-1.onrender.com/user/${id}` 
                 );
                 console.log(user.data)
                 setUser(user.data)
@@ -25,7 +24,8 @@ const UserDashboard = () => {
             }   
         } 
         fetch()
-    },[state])
+    },[id])
+
     const navigate = useNavigate()
     const viewInvoice = () =>{
         navigate('/invoice', {state})
@@ -67,6 +67,10 @@ const UserDashboard = () => {
                   {user.address}
                 </p>
                 <p className="mb-4">
+                  <span className="font-bold">email: </span>
+                  {user.email}
+                </p>
+                <p className="mb-4">
                   <span className="font-bold">Chasis Number: </span>
                   {user.chasisNumber}
                 </p>
@@ -91,8 +95,15 @@ const UserDashboard = () => {
               </div>
             </div>
             <div className="flex gap-5">
-              {!user.status == "paid" ? (
-                ""
+              {user.status == "paid" || user?.ownerName == '' ? (
+                 <NavLink
+                to={`/complete-reg/${user._id}`}
+                  // onClick={completeReg}
+                  className="bg-green-500 px-4 py-2 my-5 font-black hover:text-white"
+                >
+                  complete registration
+                </NavLink>
+
               ) : (
                 <NavLink
                 to={`/invoice/${user._id}`}
@@ -102,7 +113,7 @@ const UserDashboard = () => {
                   View Invoice
                 </NavLink>
               )}
-              {user.status == "paid" ? (
+              {!user.status == "paid" || !user?.ownerName == '' ? (
                 <button
                 to={`/receipt/${user._id}`}
                   // onClick={viewReceipt}

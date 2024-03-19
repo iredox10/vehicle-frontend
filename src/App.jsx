@@ -20,6 +20,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/complete-reg/:id" element={<CompleteReg />} />
         <Route path="/test" element={<TestInvoice />} />
         <Route path="/webhook-receipt/:id" element={<WebhookReceipt />} />
         <Route path="/login" element={<Login />} />

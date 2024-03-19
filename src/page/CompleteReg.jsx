@@ -27,7 +27,9 @@ const CompleteReg = () => {
   useEffect(()=>{
     const fetch = async ()=>{
         try {
-            const res = await axios(`http://localhost:3003/webhook-user/${id}`)
+            const res = await axios(
+                  `https://vehicle-backend-1.onrender.com/user/${id}` 
+              )
             setUser(res.data)
             console.log(user);
         } catch (err) {
@@ -72,9 +74,6 @@ const CompleteReg = () => {
       !address ||
       !vehicleMake ||
       !vehicleType ||
-      !chasisNumber ||
-      !email ||
-      !phoneNumber ||
       !weightAuthorized ||
       !netWeight ||
       !personAuthorized 
@@ -88,8 +87,7 @@ const CompleteReg = () => {
     // navigate('invoice', {state:{ownerName,address,vehicleMake,vehicleType,licenseType,licenceFee}})
     try {
       const res = await axios.post(
-        // `https://vehicle-backend-1.onrender.com/register` ||
-        `http://localhost:3003/complete-reg/${id}`,
+        `https://vehicle-backend-1.onrender.com/complete-reg/${id}`, 
         {
           ownerName,
           address,
@@ -98,11 +96,9 @@ const CompleteReg = () => {
           licenseType,
           licenceFee,
           netWeight,
-          chasisNumber,
           color,
           personAuthorized,
           weightAuthorized,
-          email,
           phoneNumber,
           applicationId: uuid4().toString(),
         }
@@ -187,14 +183,7 @@ const CompleteReg = () => {
               value={`N ${!user?.licenceFee ? "0" : user.licenceFee}`}
             />
             <div className="flex items-center gap-10">
-              <FormInput
-                type={"text"}
-                htmlFor={"email"}
-                label={"email"}
-                name={"email"}
-                onchange={(e) => setEmail(e.target.value)}
-              />
-              <FormInput
+             <FormInput
                 type={"text"}
                 htmlFor={"phoneNumber"}
                 label={"phone Number"}
@@ -219,14 +208,7 @@ const CompleteReg = () => {
               />
             </div>
             <div className="flex items-center gap-10">
-              <FormInput
-                type={"text"}
-                htmlFor={"chasis"}
-                label={"chasis number"}
-                name={"chasis"}
-                onchange={(e) => setChasisNumber(e.target.value)}
-              />
-              <FormInput
+             <FormInput
                 type={"text"}
                 htmlFor={"netWeight"}
                 label={"net Weight"}
