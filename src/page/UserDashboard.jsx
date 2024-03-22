@@ -1,38 +1,38 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom' 
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import jigawa_logo from "../../src/assets/jigawa_logo.png";
-import { path } from '../../utils/path';
+import { path } from "../../utils/path";
 
 const UserDashboard = () => {
-    const location = useLocation()
-    const {state} = location
-    // console.log(state)
-    const [user, setUser] = useState(null)
-   const {id} = useParams() 
-   console.log(id)
-    useEffect(()=>{
-        const fetch =async () =>{
-            try {
-                const user = await axios(
-                  `https://vehicle-backend-1.onrender.com/user/${id}` ||
-                  `http://localhost:3003/user/${id}`
-                );
-                console.log(user.data)
-                setUser(user.data)
-            } catch (err) {
-                console.log(err)
-            }   
-        } 
-        fetch()
-    },[state])
-    const navigate = useNavigate()
-    const viewInvoice = () =>{
-        navigate('/invoice', {state})
-    }
-    const viewReceipt = () => {
-      navigate("/receipt", { state });
+  const location = useLocation();
+  const { state } = location;
+  // console.log(state)
+  const [user, setUser] = useState(null);
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const user = await axios(
+          `https://vehicle-backend-1.onrender.com/user/${id}` 
+          // `http://localhost:3003/user/${id}`
+        );
+        console.log(user.data);
+        setUser(user.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
+    fetch();
+  }, [state]);
+  const navigate = useNavigate();
+  const viewInvoice = () => {
+    navigate("/invoice", { state });
+  };
+  const viewReceipt = () => {
+    navigate("/receipt", { state });
+  };
   return (
     <div>
       {user && (
@@ -67,6 +67,10 @@ const UserDashboard = () => {
                   {user.address}
                 </p>
                 <p className="mb-4">
+                  <span className="font-bold">Phone Number: </span>
+                  {user.phoneNumber}
+                </p>
+                <p className="mb-4">
                   <span className="font-bold">Chasis Number: </span>
                   {user.chasisNumber}
                 </p>
@@ -95,16 +99,16 @@ const UserDashboard = () => {
                 ""
               ) : (
                 <NavLink
-                to={`/invoice/${user._id}`}
+                  to={`/invoice/${user._id}`}
                   onClick={viewInvoice}
                   className="bg-green-500 px-4 py-2 my-5 font-black hover:text-white"
                 >
-                  View Invoice
+                  {!user.paymentUrl ? "Generate invoive" : "view invoice"}
                 </NavLink>
               )}
               {user.status == "paid" ? (
                 <button
-                to={`/receipt/${user._id}`}
+                  to={`/receipt/${user._id}`}
                   // onClick={viewReceipt}
                   className="bg-green-700 px-4 py-2 my-5 font-black hover:text-white"
                 >
@@ -113,21 +117,22 @@ const UserDashboard = () => {
               ) : (
                 ""
               )}
-              {user.approved == 'approve' ? (
-              <NavLink
+              {user.approved == "approve" ? (
+                <NavLink
                   to={`/user-license/${user._id}`}
                   className="bg-green-700 px-4 py-2 my-5 font-black hover:text-white"
                 >
                   view licence
                 </NavLink>
-              ):
-              ""}
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
-export default UserDashboard
+export default UserDashboard;

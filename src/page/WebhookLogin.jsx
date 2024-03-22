@@ -6,14 +6,14 @@ import { useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { path } from '../../utils/path';
 
-const Login = () => {
+const WebhookLogin = () => {
   const [email, setEmail] = useState("");
 const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        // `https://vehicle-backend-1.onrender.com/login`  || 
+        `https://vehicle-backend-1.onrender.com/login`  || 
          'http://localhost:3003/login',
         {
           email,
@@ -21,7 +21,7 @@ const navigate = useNavigate()
       );
       const user = res.data
       console.log(user)
-      navigate(`/user-dashboard/${user._id}`, {state: user})
+      navigate(`/webhook-user-dashboard/${user._id}`)
       
     } catch (err) {
       console.log(err);
@@ -82,4 +82,4 @@ const navigate = useNavigate()
   );
 }
 
-export default Login
+export default WebhookLogin

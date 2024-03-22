@@ -13,6 +13,9 @@ import TestInvoice from './page/TestInvoice';
 import WebhookUser from './page/WebhookUser';
 import CompleteReg from './page/CompleteReg';
 import WebhookReceipt from './page/WebhookReceipt';
+import VerifyPayment from './page/VerifyPayment';
+import WebhookLogin from './page/WebhookLogin';
+
 function App() {
   return (
     <Router>
@@ -21,6 +24,7 @@ function App() {
         <Route path="/complete-reg/:id" element={<CompleteReg />} />
         <Route path="/test" element={<TestInvoice />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/webhook-login" element={<WebhookLogin />} />
         <Route path="/receipt/:id" element={<Receipt />} />
         <Route path="/webhook-receipt/:id" element={<WebhookReceipt />} />
         <Route path="/invoice/:id" element={<Invoice />} />
@@ -36,6 +40,7 @@ function App() {
           path="/payment-successfull"
           element={<PaymentSuccess />}
         />
+        <Route path="/verify-payment/:id" element={<VerifyPayment />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/user-license/:id" element={<UserLicense />} />
       </Routes>

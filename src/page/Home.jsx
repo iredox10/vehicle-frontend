@@ -80,8 +80,8 @@ const Home = () => {
     // navigate('invoice', {state:{ownerName,address,vehicleMake,vehicleType,licenseType,licenceFee}})
     try {
       const res = await axios.post(
-        `https://vehicle-backend-1.onrender.com/register` ||
-        'http://localhost:3003/register',
+        // 'http://localhost:3003/register',
+          `https://vehicle-backend-1.onrender.com/register`,
         {
           ownerName,
           address,

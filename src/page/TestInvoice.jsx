@@ -69,7 +69,7 @@ const TestInvoice = () => {
     //! add frontend url to the response url
     //  formData.append("ResponseUrl", "http://localhost:5173/payment-successfull/")
     //  formData.append("ResponseUrl", 'https://vehicle-frontendd.onrender.com/payment-successfull/')
-    //  formData.append("ResponseUrl",'https://vehicle-frontend.netlify.app/payment-successfull')
+     formData.append("ResponseUrl",'https://vehicle-frontend.netlify.app/payment-successfull')
 try{
   const res =
        await fetch("https://demo.nabroll.com.ng/api/v1/transactions/initiate",{
@@ -78,18 +78,8 @@ try{
       })
       let result = await res.json()
       if (result && result.code === "00"){
-        // const res = await axios.post(`http://localhost:3003/updateRef/${id}` ||`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
-        // const res = await axios.post(`https://vehicle-backend-1.onrender.com/updateRef/${id}` , {
-        //   chasisNumber: state.chasisNumber,
-        //   status,
-        //   paymentUrl: result.PaymentUrl,
-        //   transactionRef: result.TransactionRef,
-        //   paymentCode: result.PaymentCode,
-        //   payerRefNo: PayerRefNo
-        // });
-        localStorage.setItem('plateNumber_user_id', '1234')
-        // localStorage.setItem()
-        // console.log(res.data)
+        localStorage.setItem('plateNumber_user_id',id )
+        console.log(result)
         window.location.replace(result.PaymentUrl);
       }
        console.log(result);
