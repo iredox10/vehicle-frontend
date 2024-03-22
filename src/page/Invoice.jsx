@@ -238,7 +238,7 @@ const Invoice = () => {
                   className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-700"
                   onClick={() => setModel(!model)}
                 >
-                  `proceed to payment`
+                  proceed to payment
                 </button>
                   }
                 <button
