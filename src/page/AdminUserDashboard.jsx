@@ -16,7 +16,7 @@ const AdminUserDashboard = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios(`${path}/admin-user/${id}` || `https://vehicle-backend-1.onrender.com/admin-user/${id}`);
+        const res = await axios(`https://vehicle-backend-1.onrender.com/admin-user/${id}`);
         setUser(res.data);
         console.log(res.data);
       } catch (err) {
@@ -35,7 +35,7 @@ const AdminUserDashboard = () => {
     try {
       const date = new Date();
       const expireDate  =new Date(date.setFullYear(date.getFullYear() +1))
-      const res = await axios.post(`${path}/update-approve/${id}` || `https://vehicle-backend-1.onrender.com/update-approve/${id}`, {
+      const res = await axios.post(`https://vehicle-backend-1.onrender.com/update-approve/${id}`, {
       approve,
       expireDate,
       plateNumber
