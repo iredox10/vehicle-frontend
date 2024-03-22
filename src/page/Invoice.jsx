@@ -232,12 +232,14 @@ const Invoice = () => {
             </p>
             <div className="capitalize ">
               <div className="flex justify-center my-2">
+                {state.status == 'paid' ? '' :
                 <button
                   className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-700"
                   onClick={() => setModel(!model)}
                 >
-                  proceed to payment <FaArrowRight />
+                  `proceed to payment`
                 </button>
+                  }
                 <button
                   onClick={() => toPDF()}
                   className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-500 mx-5"
