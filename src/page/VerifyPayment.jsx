@@ -96,7 +96,7 @@ const VerifyPayment = () => {
        <p className="bg-green-500 text-white"> {msg} </p>
         <div>
           <p> <span className="font-bold">Payment Code: </span> {resData.paymentCode}</p>
-          <p> <span className="font-bold">Amount : </span> {resData.amount}</p>
+          <p> <span className="font-bold">Amount : </span>N {resData.amount}</p>
           <p> <span className="font-bold">Date: </span> {resData.paymentDate}</p>
         </div>
       </div>}
