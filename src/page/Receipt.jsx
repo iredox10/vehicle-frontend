@@ -2,11 +2,28 @@ import { useLocation, useParams } from "react-router-dom"
 import jigawa_logo from "../../src/assets/jigawa_logo.png";
 import QRCodeComponent from "../components/Qrcode"
 import {v4 as uuid4} from 'uuid'
-const Receipt = (props) => {
-    const l = useLocation()
-    // console.log(l.state)
-    const {state} = l
-    console.log(state)
+import { useEffect, useState } from "react";
+import axios from "axios";
+const Receipt = () => {
+ const { id } = useParams();
+ const [state, setState] = useState('')
+  console.log(id);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const user = await axios(
+          `https://vehicle-backend-1.onrender.com/user/${id}` 
+          // `http://localhost:3003/user/${id}`
+        );
+        console.log(user.data);
+        setState(user.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetch();
+  }, []);
+
   return (
     <div className="w-[60%] my-5 mx-auto  bg-green-700/20  ">
       <div className=" bg-green-500 p-5 ">
@@ -23,7 +40,7 @@ const Receipt = (props) => {
           <div className=" mb-5">
             <p className="text-sm">
               <span className="font-bold">Application ID: </span>
-              {state.applicationId.slice(0, 16)}
+              {state?.applicationId.slice(0, 16)}
             </p>
             <p className="text-sm ">
               <span className="font-bold">Transaction ID: </span>
