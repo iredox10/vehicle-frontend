@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { HmacSHA256 } from "crypto-js";
 import { v4 as uuid4 } from "uuid";
 import { useEffect, useState } from "react";
@@ -9,13 +9,15 @@ const VerifyPayment = () => {
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resData, setResData] = useState(null)
   const [TransactionRef, setTransactionRef] = useState(null);
   const navigate = useNavigate();
-  const id = localStorage.getItem("plateNumber_user_id");
+  // const id = localStorage.getItem("plateNumber_user_id");
+  const {id} = useParams()
   const userPage = () => {
     navigate(`/user-dashboard/${id}`);
   };
-//! IMPLEMENT VERIFICATION OF USER PAYMENT USING THE DATA YOU SAVE WHEN INITIATING TRANSACITON.
+
   const handleGenerateHmac = (data, key) => {
     const hmac = HmacSHA256(data, key);
     return hmac;
@@ -25,8 +27,7 @@ const VerifyPayment = () => {
     const fetch = async () => {
       try {
         const user = await axios(
-          `https://vehicle-backend-1.onrender.com/user/${id}` ||
-            `http://localhost:3003/user/${id}`
+          `https://vehicle-backend-1.onrender.com/user/${id}`
         );
         console.log(user.data);
         setLoading(false);
@@ -76,6 +77,7 @@ const VerifyPayment = () => {
           // if(data.msg == 'Pending')
           if (data) {
             setMsg(data.msg);
+            setResData(data)
             // setLoading(false);
           } else {
             setMsg("error in processing payment");
@@ -90,15 +92,14 @@ const VerifyPayment = () => {
 
   return (
     <div className="absolute top-2/4 text-center    left-[40%] ">
-      <form>
-        <FormInput
-          label={"input transaction reference"}
-          htmlFor={"transaction reference"}
-          type={"text"}
-          onchange={(e)=> setTransactionRef( e.target.value)}
-        />
-      </form>
-      <button className="bg-green-400 px-4 py-2 capitalize font-bold hover:bg-green-700">verify</button>
+      {!msg ? <p>loading...</p> : <div>
+       <p> {msg} </p>
+        <div>
+          <p> <span>Payer Reference Number: </span> {resData.PayerRefNo}</p>
+          <p> <span>Amount Paid: </span> {resData.amount}</p>
+          <p> <span>Payment Date: </span> {resData.paymentDate}</p>
+        </div>
+      </div>}
     </div>
   );
 };
