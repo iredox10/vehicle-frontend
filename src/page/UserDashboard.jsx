@@ -107,13 +107,13 @@ const UserDashboard = () => {
                 </NavLink>
               )}
               {user.status == "paid" ? (
-                <button
+                <NavLink
                   to={`/receipt/${user._id}`}
                   // onClick={viewReceipt}
                   className="bg-green-700 px-4 py-2 my-5 font-black hover:text-white"
                 >
                   view Receipt
-                </button>
+                </NavLink>
               ) : (
                 ""
               )}
