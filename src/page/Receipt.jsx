@@ -39,12 +39,14 @@ const Receipt = () => {
           </div>
           <div className=" mb-5">
             <p className="text-sm">
-              <span className="font-bold">Application ID: </span>
-              {state?.applicationId.slice(0, 16)}
+              <span className="font-bold">payment Reference: </span>
+              {/* {state?.applicationId.slice(0, 16)} */}
+              {state?.paymentRef}
             </p>
             <p className="text-sm ">
               <span className="font-bold">Transaction ID: </span>
-              {uuid4().toString().slice(0, 17)}
+              {/* {uuid4().toString().slice(0, 17)} */}
+              {state?.transactionRef}
             </p>
           </div>
         </div>
