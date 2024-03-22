@@ -99,8 +99,9 @@ const Invoice = () => {
         );
         localStorage.setItem("plateNumber_user_id", state._id);
         console.log(res);
-        setLoadingMsg("");
-        // window.location.replace(result.PaymentUrl);
+        setLoadingMsg("invoice generated");
+        // navigate(`/invoice/${id}`)
+        window.location.replace(`/invoice/${id}`);
         console.log(result);
       }
     } catch (err) {
