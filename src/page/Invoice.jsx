@@ -15,19 +15,28 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { path } from "../../utils/path";
 import { HmacSHA256 } from "crypto-js";
+import VerifyPayment from "./VerifyPayment";
 
 const Invoice = () => {
   const location = useLocation();
   // const {state} = location
+  const [TransactionRef, setTransactionRef] = useState(null);
   const [state, setUser] = useState(null);
+  const [msg, setMsg] = useState("");
   const [loadingMsg, setLoadingMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resData, setResData] = useState(null);
+  const [modelStatus, setModelStatus] = useState(false);
+  const [model, setModel] = useState(false);
   const { id } = useParams();
+
   console.log(id);
+
   useEffect(() => {
     const fetch = async () => {
       try {
         const user = await axios(
-          `https://vehicle-backend-1.onrender.com/user/${id}` 
+          `https://vehicle-backend-1.onrender.com/user/${id}`
           // `http://localhost:3003/user/${id}`
         );
         console.log(user.data);
@@ -39,12 +48,7 @@ const Invoice = () => {
     fetch();
   }, []);
 
-  const navigate = useNavigate();
-
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
-
-  const [model, setModel] = useState(false);
-  const [status, setStatus] = useState("paid");
 
   const handleGenerateHmac = (data, key) => {
     const hmac = HmacSHA256(data, key);
@@ -55,7 +59,8 @@ const Invoice = () => {
   const SecretKey = "Sk_teSTN-HY[n1]wIO32A-AU0XP5kRZ[tzHpOxQ6bf9]]";
   const PayerRefNo = uuid4().slice(0, 13);
   const Amount = state?.licenceFee;
-
+  const transactionRef = state?.transactionRef;
+  const payerRefNo = state?.payerRefNo;
   const hashString = PayerRefNo + Amount + ApiKey;
 
   const hashKey = handleGenerateHmac(hashString, SecretKey);
@@ -108,7 +113,43 @@ const Invoice = () => {
       console.log(err);
     }
   };
+  const verifyPayment = async () => {
+    setLoading(true);
+    if (transactionRef && Amount && payerRefNo) {
+      const hashString = payerRefNo + Amount + transactionRef + ApiKey;
+      const hashKey = handleGenerateHmac(hashString, SecretKey);
 
+      const formData = new FormData();
+      formData.append(
+        "ApiKey",
+        "Pk_TeStHV9FnLZE1vSidgkH36b4s473lpKYkI58gYgc6M"
+      );
+      formData.append("Hash", hashKey);
+      formData.append("TransactionRef", transactionRef.toString());
+      try {
+        const res = await fetch(
+          "https://demo.nabroll.com.ng/api/v1/transactions/verify",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        // setLoading(true);
+        const data = await res.json();
+        console.log(data);
+        // if(data.msg == 'Pending')
+        if (data) {
+          setMsg(data.msg);
+          setResData(data);
+          setLoading(false);
+        } else {
+          setMsg("error in processing payment");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const handleCheckout = async (e) => {
     e.preventDefault();
     const hashString = PayerRefNo + state?.paymentCode + state?.Amount;
@@ -233,27 +274,32 @@ const Invoice = () => {
             </p>
             <div className="capitalize ">
               <div className="flex justify-center my-2">
-                {state.status == 'paid' ? '' :
-                <button
-                  className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-700"
-                  onClick={() => setModel(!model)}
-                >
-                  proceed to payment
-                </button>
-                  }
+                {!state.status == "paid" ? (
+                  ""
+                ) : (
+                  <button
+                    className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-700"
+                    onClick={() => setModel(!model)}
+                  >
+                    proceed to payment
+                  </button>
+                )}
                 <button
                   onClick={() => toPDF()}
                   className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-500 mx-5"
                 >
                   Download <FaArrowDown />
                 </button>
-                <button
-                  className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-500 mx-5"
-                >
-                  <NavLink to={`/verify-payment/${state._id}`}>
-                    check status
-                  </NavLink>
-                </button>
+                {state.status ? (
+                  <button
+                    className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-500 mx-5"
+                    onClick={() => setModelStatus(!modelStatus)}
+                  >
+                    check Status
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -262,7 +308,15 @@ const Invoice = () => {
       {model && (
         <div className="absolute top-0 w-full h-full bg-black/20">
           <div className="relative bg-white w-2/4 h-2/4 top-1/4 left-1/4 shadow-lg">
-            <button onClick={() => setModel(!model)} className="absolute right-5 top-2"><FaTimes className="text-2xl bg-red-600 text-white hover:text-black" /></button>
+            <button
+              onClick={() => {
+                setModel(!model);
+                verifyPayment();
+              }}
+              className="absolute right-5 top-2"
+            >
+              <FaTimes className="text-2xl bg-red-600 text-white hover:text-black" />
+            </button>
             <div>
               <h1 className="text-center text-4xl font-bold capitalize">
                 Payment
@@ -285,6 +339,41 @@ const Invoice = () => {
                 </p>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {modelStatus && (
+        <div className="absolute top-0 w-full h-full bg-black/50">
+          <button className="" onClick={() => setModelStatus(!modelStatus)}>
+            <FaTimes className="text-2xl bg-red-600 text-white hover:text-black" />
+          </button>
+          <div className="relative top-1/4 left-1/4">
+            {" "}
+            {!msg ? (
+              <div>
+                {" "}
+                {/* <p className="text-white text-2xl uppercase ">loading...</p> */}
+                <button onClick={verifyPayment} className="text-xl bg-green-500 py-2 px-4">Check</button>
+              </div>
+            ) : (
+              <div className="text-white ">
+                <p className="text-2xl text-bold text-white"> {msg} </p>
+                <div>
+                  <p>
+                    {" "}
+                    <span>Payer Reference Number: </span> {resData.PayerRefNo}
+                  </p>
+                  <p>
+                    {" "}
+                    <span>Amount : </span> {resData.amount}
+                  </p>
+                  <p>
+                    {" "}
+                    <span>Payment Date: </span> {resData.paymentDate}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
