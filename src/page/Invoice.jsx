@@ -274,7 +274,7 @@ const Invoice = () => {
             </p>
             <div className="capitalize ">
               <div className="flex justify-center my-2">
-                {!state.status == "paid" ? (
+                {state.status == "paid" ? (
                   ""
                 ) : (
                   <button
@@ -290,7 +290,7 @@ const Invoice = () => {
                 >
                   Download <FaArrowDown />
                 </button>
-                {state.status ? (
+                {!state.status ? (
                   <button
                     className="flex items-center gap-2 py-2 px-4 text-sm font-bold capitalize text-white hover:text-black bg-green-500 mx-5"
                     onClick={() => setModelStatus(!modelStatus)}
